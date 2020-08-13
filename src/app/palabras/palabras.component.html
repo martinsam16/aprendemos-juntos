@@ -1,0 +1,41 @@
+<mat-card>
+  <mat-card-header>
+    <div mat-card-avatar class="pocoyo-card-header-img"></div>
+    <mat-card-title>Aprende a Leer</mat-card-title>
+    <mat-card-subtitle>Por Palabras</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-form-field class="full-width">
+      <mat-label>Ingrese la oración</mat-label>
+      <textarea matInput #oracion
+                (keyup)="separarPalabras(oracion.value.trim())"
+                placeholder="Ej. Había una vez..."></textarea>
+    </mat-form-field>
+    <mat-card-actions>
+      <button mat-flat-button color="primary"
+              (click)="hablar(oracion.value)">
+        Leer todo
+      </button>
+      <button mat-flat-button color="warn"
+              (click)="limpiarDatos();oracion.value=''">
+        Limpiar
+      </button>
+      <mat-slide-toggle [(ngModel)]="eliminarDuplicados" (change)="separarPalabras(oracion.value.trim())">
+        Eliminar Duplicados
+      </mat-slide-toggle>
+    </mat-card-actions>
+  </mat-card-content>
+</mat-card>
+<mat-grid-list cols="2" rowHeight="2:1">
+  <mat-grid-tile *ngFor="let palabra of palabras">
+    <button mat-raised-button
+            color="accent"
+            class="full-button"
+            (click)="hablar(palabra)">
+      <mat-icon>campaign</mat-icon>
+      {{palabra}}
+    </button>
+  </mat-grid-tile>
+</mat-grid-list>
+
+
